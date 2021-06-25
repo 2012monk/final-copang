@@ -5,7 +5,13 @@ import './Product.css';
 import ProductListRowItem from './ProductListRowItem';
 
 
+
+
+
+
+
 const ProductList = (history) =>{
+    console.log(history);
     const [ProductList, setProductList] = useState([]);
 
     useEffect( ()=>{

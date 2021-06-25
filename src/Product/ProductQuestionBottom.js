@@ -8,6 +8,7 @@ const ProductQuestionBottom=()=>{
         const res = async () => {
             const result = await axios.get("http://192.168.0.13:9001/question/list");
             setQuestion(result.data)
+            console.log(result);
         }
         res();
     }, [])
