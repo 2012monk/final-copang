@@ -19,6 +19,7 @@ const RouteMain = () =>{
             <Route path="/product/selectOne/:sid/ProductReviewBottom" component={ProductReviewBottom}/>
             <Route path="/product/selectOne/:sid/ProductQuestionBottom" component={ProductQuestionBottom}/>
             <Route path="/purchase/product/" component={test}/>
+
         </div>
     )
 }
