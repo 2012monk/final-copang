@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './test/App';
+import App from './App';
+// 123123123123
 
 
 ReactDOM.render(
