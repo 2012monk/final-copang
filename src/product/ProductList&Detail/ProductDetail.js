@@ -118,7 +118,7 @@ const ProductDetail = ({ match, history }) => {
                                         <li row={row} key={idx}
                                             onClick={
                                                 () => {
-                                                    history.push("/member/4/product/selectOne/" + row.sid);
+                                                    history.push("/product/selectOne/" + row.sid);
                                                 }
                                             }>
                                             <dl style={{ height: '100px' }}>
