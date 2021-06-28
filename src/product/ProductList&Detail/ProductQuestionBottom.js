@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import ProductQuestionModal from './ProductQuestionModal';
+// import { TableCell,TableRow } from '@material-ui/core';
 
 const ProductQuestionBottom=()=>{
     
@@ -12,6 +14,15 @@ const ProductQuestionBottom=()=>{
         res();
     }, [])
 
+    const [modalOpen, setModelOpen] = useState(false);
+
+    const openModal = () => {
+        setModelOpen(true);
+    }
+
+    const closeModal = () => {
+        setModelOpen(false);
+    }
 
     return(
             <div className="product-question-desc">
@@ -19,7 +30,53 @@ const ProductQuestionBottom=()=>{
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <div className="product-question-desc-header">
                         <div style={{fontWeight:'bold', fontSize:'1.5em', marginTop:'3%'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        상품문의</div><br/><br/>
+                        상품문의<span className="product-question-span"><button type="button" className="product-question-button" onClick={openModal}>문의하기</button></span></div>
+                        <ProductQuestionModal open={modalOpen} close={closeModal} header="상품 문의">
+                            <table className="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>상품정보</th>
+                                        <td>
+                                            <div>
+                                                <div role="button" title="신발사이즈(mm)을(를) 선택하세요.">
+                                                <select name="option" placeholder="신발사이즈(mm)을(를) 선택하세요.">
+                                                    <option value="1">123456789</option>  
+                                                    <option value="2">2</option>    
+                                                    <option value="3">3</option>    
+                                                    <option value="4">4</option>    
+                                                </select>
+                                                </div>
+                                                <div role="button" title="신발사이즈(mm)을(를) 선택하세요.">
+                                                <select name="option" placeholder="신발사이즈(mm)을(를) 선택하세요.">
+                                                    <option value="1">987654321</option>  
+                                                    <option value="2">2</option>    
+                                                    <option value="3">3</option>    
+                                                    <option value="4">4</option>    
+                                                </select>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>판매자</th>
+                                        <td>
+                                            판매자
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>문의내용</th>
+                                        <td>
+                                            <textarea cols="100" rows="10"></textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div style={{textAlign:'center'}}>
+                                <button type="submit" className="question-submit-btn"><span>확인</span></button>
+                                <button type="button" className="question-cancel-btn" onClick={closeModal}><span>취소</span></button>
+                            </div>
+                        </ProductQuestionModal>
+                        <br/><br/>
                         <ul className="product-question-desc">
                             <li>
                             구매한 상품의 취소/반품은 마이쿠팡 구매내역에서 신청 가능합니다.

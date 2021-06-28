@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Modal from './productModal';
+import Modal from './ProductReviewModal';
 
 const ProductReviewBottom = () => {
 

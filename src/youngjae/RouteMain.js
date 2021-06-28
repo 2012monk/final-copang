@@ -1,12 +1,12 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
-import ProductList from './product/ProductList';
-import Menu from './header/Menu';
-import ProductDetail from './product/ProductDetail';
-import test from './product/test';
-import ProductDescBottom from './product/ProductDescBottom';
-import ProductReviewBottom from './product/ProductReviewBottom';
-import ProductQuestionBottom from './product/ProductQuestionBottom';
+import ProductList from '../product/ProductList&Detail/ProductList';
+import Menu from './Menu';
+import ProductDetail from '../product/ProductList&Detail/ProductDetail';
+import test from './test';
+import ProductDescBottom from '../product/ProductList&Detail/ProductDescBottom';
+import ProductReviewBottom from '../product/ProductList&Detail/ProductReviewBottom';
+import ProductQuestionBottom from '../product/ProductList&Detail/ProductQuestionBottom';
 
 const RouteMain = () =>{
     return (

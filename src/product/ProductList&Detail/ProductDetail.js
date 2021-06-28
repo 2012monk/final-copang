@@ -153,17 +153,17 @@ const ProductDetail = ({ match, history }) => {
                     </div>
                     <div className="productMenuBar" style={{ position: 'sticky' }}>
                         <ul className="productMenuBarUl">
-                            <li className="a" onClick={
+                            <li className="ProductDescBottom" onClick={
                                 () => {
                                     history.push("/product/selectOne/" + productSID + "/ProductDescBottom");
                                 }
                             }>상품상세</li>
-                            <li className="b" onClick={
+                            <li className="ProductReviewBottom" onClick={
                                 () => {
                                     history.push("/product/selectOne/" + productSID + "/ProductReviewBottom");
                                 }
                             }>상품리뷰({Review.length})</li>
-                            <li className="c" onClick={
+                            <li className="ProductQuestionBottom" onClick={
                                 () => {
                                     history.push("/product/selectOne/" + productSID + "/ProductQuestionBottom");
                                 }
@@ -177,4 +177,4 @@ const ProductDetail = ({ match, history }) => {
         )
     }
 
-    export default ProductDetail;
+export default ProductDetail;
