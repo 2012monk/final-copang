@@ -1,24 +1,24 @@
-import React from 'react';
-import {Route} from 'react-router-dom';
-import ProductList from '../product/ProductList&Detail/ProductList';
+import {BrowserRouter, Route} from 'react-router-dom';
+import RouteHyunjin from './hyunjin/RouteHyunjin';
+import Cart from './purchase/Cart';
 import Menu from './Menu';
-import ProductDetail from '../product/ProductList&Detail/ProductDetail';
-import test from './test';
-import ProductDescBottom from '../product/ProductList&Detail/ProductDescBottom';
-import ProductReviewBottom from '../product/ProductList&Detail/ProductReviewBottom';
-import ProductQuestionBottom from '../product/ProductList&Detail/ProductQuestionBottom';
+//import ProductListApp from './youngjae/ProductListApp';
+//import OrderPageApp from './purchase/OrderPageApp';
+import MyCopang from "./member/MyCopang";
 
 const RouteMain = () =>{
     return (
         <div>
-            <Menu />
-            <Route exact path="/" component={ProductList}/>
-            <Route path="/list" component={ProductList}/>
-            <Route path="/product/selectOne/:sid" component={ProductDetail}/>
-            <Route path="/product/selectOne/:sid/ProductDescBottom" component={ProductDescBottom}/>
-            <Route path="/product/selectOne/:sid/ProductReviewBottom" component={ProductReviewBottom}/>
-            <Route path="/product/selectOne/:sid/ProductQuestionBottom" component={ProductQuestionBottom}/>
-            <Route path="/purchase/product/" component={test}/>
+            <BrowserRouter>
+                <Menu/>
+                <Route path="/member/1" component={Cart}/>
+                {/* <Route path="/member/2" component={OrderPageApp}/> */}
+                {/* <Route path="/member/3" component={sds}/> */}
+                {/* <Route path="/member/4" component={ProductListApp}/> */}
+                <Route path="/member/5" component={MyCopang}/>
+                <Route path="/member/6" component={RouteHyunjin}/>
+                <Route path="/member/7" component={RouteHyunjin}/>
+            </BrowserRouter>
         </div>
     )
 }
