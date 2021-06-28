@@ -4,10 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-/src/App.js
-/src/index.js
-/src/Menu.js
-/src/RouteMain.js
 
 /package.json
 /package-lock.json
