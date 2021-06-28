@@ -7,19 +7,19 @@ import ProductDescBottom from '../product/ProductList&Detail/ProductDescBottom';
 import ProductReviewBottom from '../product/ProductList&Detail/ProductReviewBottom';
 import ProductQuestionBottom from '../product/ProductList&Detail/ProductQuestionBottom';
 
-const RouteMain = () =>{
+const ProductListRouteMain = () =>{
     return (
         <div>
             <ProductList />
-            <Route exact path="/" component={ProductList}/>
-            <Route path="/list" component={ProductList}/>
-            <Route path="/member/6/product/selectOne/:sid" component={ProductDetail}/>
-            <Route path="/product/selectOne/:sid/ProductDescBottom" component={ProductDescBottom}/>
-            <Route path="/product/selectOne/:sid/ProductReviewBottom" component={ProductReviewBottom}/>
-            <Route path="/product/selectOne/:sid/ProductQuestionBottom" component={ProductQuestionBottom}/>
-            <Route path="/purchase/product/" component={test}/>
+            <Route exact path="/member/4/" component={ProductList}/>
+            <Route path="/member/4/list" component={ProductList}/>
+            <Route path="/member/4/product/selectOne/:sid" component={ProductDetail}/>
+            <Route path="/member/4/product/selectOne/:sid/ProductDescBottom" component={ProductDescBottom}/>
+            <Route path="/member/4/product/selectOne/:sid/ProductReviewBottom" component={ProductReviewBottom}/>
+            <Route path="/member/4/product/selectOne/:sid/ProductQuestionBottom" component={ProductQuestionBottom}/>
+            <Route path="/member/4/purchase/product/" component={test}/>
         </div>
     )
 }
 
-export default RouteMain;
+export default ProductListRouteMain;
