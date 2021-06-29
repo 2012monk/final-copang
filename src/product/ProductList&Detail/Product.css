@@ -177,7 +177,7 @@ div.product-question-desc{
 }
 
 div.product-question-desc-header{
-    margin-left: 12%;
+    margin-left: 9%;
     width: 83%;
     height: 1000px;
     border:1px solid #aaa;
@@ -224,14 +224,14 @@ div.product-review{
 }
 
 div.product-review-header{
-    margin-left: 12%;
+    margin-left: 9%;
     width: 83%;
     height: 1000px;
     border-top:1px solid #aaa;
 }
 
-span.star{
-    font-size: 30pt;
+.star{
+    font-size:50px;
     color: orange;
 }
 
@@ -241,7 +241,7 @@ span.reviewlength{
 
 ul.product-review-header-image{
     list-style: none;
-    margin-left: -4.5%;
+    margin-left: -0.5%;
 }
 
 ul.product-review-header-image li{
@@ -314,7 +314,7 @@ div.product-review-body{
     margin-top: 5%;
 }
 
-span.smstar{
+.smstar{
     color: orange;
 }
 
@@ -388,3 +388,7 @@ button.question-cancel-btn{
     margin-left: 1%;
 }
 
+span.writeDate{
+    font-size: 10pt;
+    color: #aaa;
+}
