@@ -3,7 +3,11 @@ import { withRouter } from 'react-router-dom';
 import './Product.css';
 
 const ProductListRowItem = (props) => {
-    console.log(props.row)
+
+    const numberFormat = (num) => {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    }
+
     let itemId = props.row.itemId
 
     return (
@@ -15,7 +19,7 @@ const ProductListRowItem = (props) => {
             }>
             <dl>
                 <dt>
-                    <img alt={props.row.image} src="/에어맥스97.PNG" style={{ width: '230px', height: '230px' }} />
+                    <img alt={props.row.mainImg} src={props.row.mainImg} style={{ width: '230px', height: '230px' }} />
                 </dt>
                 <dd className="desc">
                     <div>
@@ -24,7 +28,7 @@ const ProductListRowItem = (props) => {
                         </div>
                         <div className="price-area">
                             <em className="sale">
-                                <strong className="price-value">{props.row.price}</strong>원
+                                <strong className="price-value">{numberFormat(props.row.price)}</strong>원
                             </em>
                         </div>
                     </div>
