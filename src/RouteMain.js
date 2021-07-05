@@ -3,9 +3,12 @@ import { Route, Switch } from "react-router-dom";
 import RouteHyunjin from "./hyunjin/RouteHyunjin";
 import Cart from "./purchase/Cart";
 import Menu from "./Menu";
+import Cart from "./purchase/Cart";
+import AddNewProductApp from "./product/AddNewProduct/AddNewProductApp";
+import OrderComplete from "./purchase/OrderComplete";
 import ProductListRouteMain from './youngjae/ProductListRouteMain';
-//import OrderPageApp from "./purchase/OrderPageApp";
 import MyCopang from "./member/MyCopang";
+
 import AddNewProductApp from "./product/AddNewProduct/AddNewProductApp";
 import Header from "./header/Header.js";
 import TopBar from "./TopBar/TopBar";
@@ -15,7 +18,12 @@ import Auth from "./TopBar/hoc/auth";
 //import SearchBox from "./header/SearchBox/SearchBox";
 import axios from 'axios';
 import CategoryForm from './header/SearchBox/CategoryForm';
+import OrderPageApp from "./purchase/OrderPageApp";
 import {autoLoginWithAccessToken, getCookie, auth} from './_actions/user_actions';
+import RouteHyunjin from "./hyunjin/RouteHyunjin";
+
+
+
 
 const RouteMain = () => {
   return (
@@ -39,6 +47,9 @@ const RouteMain = () => {
           <Route path="/register" component={Auth(RegisterPage, false)} />
           <Route path="/cart" component={Auth(Cart, true)} />
           <Route path="/mycopang" component={Auth(MyCopang, true)} />
+          
+          <Route path="/order/complete" component={OrderComplete} />
+          <Route path="/order/do" component={OrderPageApp} />
         </Switch>
         <Menu />
         </div>
