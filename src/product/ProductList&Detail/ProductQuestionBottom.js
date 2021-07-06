@@ -50,6 +50,7 @@ const ProductQuestionBottom=(props)=>{
     const [Question, setQuestion] = useState([]);
     useEffect(() => {
         const res = async () => {
+
             const result = await axios.get("https://alconn.co/api/inquiry/client");
             for(let i=0; i<result.data.data.length; i++){
                 result.data.data[i].check = false;
