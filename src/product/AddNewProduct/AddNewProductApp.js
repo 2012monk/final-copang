@@ -164,7 +164,10 @@ const AddNewProductApp = () => {
     // console.log(optionList);
     setProductData({
       ...productData,
-      itemDetailFormList: [...productData.itemDetailFormList, optionInfo],
+      itemDetailFormList: [
+        ...productData.itemDetailFormList,
+        { ...optionInfo },
+      ],
     });
     document.getElementById("optionName").value = "";
     document.getElementById("optionValue").value = "";
