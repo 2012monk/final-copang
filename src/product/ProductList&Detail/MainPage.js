@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import './Product.css';
 
 const MainPage = ({history}) => {
@@ -10,7 +11,6 @@ const MainPage = ({history}) => {
     let SHOES_CATEGORY_ID=2025
     let JEWELRY_CATEGORY_ID=0
     let COOKWARE_CATEGORY_ID=1060
-
 
     return (
         <div style={{ width: '100%', height: '100%' }}>
