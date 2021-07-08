@@ -463,3 +463,8 @@ table tbody.question-tbody td{
     height: 100px;
     line-height: 0px;
 }
+
+ul.MainImage li{
+    
+    float: left;
+}
