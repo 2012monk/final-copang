@@ -13,7 +13,7 @@ const ProductList = (props,{history}) =>{
     useEffect(() => {
         if(props.match.path==="/product"){
             const res = async() =>{
-                const result= await axios.get("https://alconn.co/api/item/list/0");
+                const result= await axios.get("https://alconn.co/api/item/search");
                 setProductList(result.data.data.list)
             }
             res();
