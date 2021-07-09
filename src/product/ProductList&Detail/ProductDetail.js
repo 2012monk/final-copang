@@ -12,7 +12,6 @@ const numberFormat = (num) => {
 const ProductDetail = ({ match, history }) => {
     //history로 보낸 itemId를 match.params로 받음 
     let itemId = match.params.itemId;
-    
     //개별상품의 정보를 itemId로 받아 ProductOne에 저장 
     const [ProductOne, setProductOne] = useState([]);
     useEffect(() => {
@@ -22,11 +21,12 @@ const ProductDetail = ({ match, history }) => {
         }
         res();
     }, [itemId])
+    console.log(ProductOne)
     
     const [ProductList, setProductList] = useState([]);
     useEffect(() => {
         const res = async () => {
-            const result = await axios.get("https://alconn.co/api/item/list");
+            const result = await axios.get("https://alconn.co/api/item/list/0");
             setProductList(result.data.data)
         }
         res();
@@ -56,7 +56,15 @@ const ProductDetail = ({ match, history }) => {
                     <div className="dsecImage" style={{ width: '410px', height: '410px' }}><img className="productImage"  alt={ProductOne.mainImg} src={ProductOne.itemDetailFormList&&ProductOne.itemDetailFormList[0].mainImg} /></div>
                     <div className="productdesc" >
                         <div className="productName" style={{ width: '479px', borderBottom: '1px sloid gray' }}><h2>{ProductOne.itemName}</h2>{ProductOne.description}</div>
-                        <div className="productStar"><StarIcon className="smstar"></StarIcon></div>
+                        <div className="productStar">
+                        {
+                                Math.round(ProductOne.averageRating) === 1 ? <div><StarIcon className="smstar"></StarIcon><StarIcon className="emptyStar"/><StarIcon className="emptyStar"/><StarIcon className="emptyStar"/><StarIcon className="emptyStar"/><span className="ReviewCount">({ProductOne.countReviews})</span></div>
+                                    : Math.round(ProductOne.averageRating) === 2 ? <div><StarIcon className="smstar"></StarIcon><StarIcon className="smstar"></StarIcon><StarIcon className="emptyStar"/><StarIcon className="emptyStar"/><StarIcon className="emptyStar"/><span className="ReviewCount">({ProductOne.countReviews})</span></div>
+                                        : Math.round(ProductOne.averageRating) === 3 ? <div><StarIcon className="smstar"></StarIcon><StarIcon className="smstar"></StarIcon><StarIcon className="smstar"></StarIcon><StarIcon className="emptyStar"/><StarIcon className="emptyStar"/><span className="ReviewCount">({ProductOne.countReviews})</span></div>
+                                            : Math.round(ProductOne.averageRating) === 4 ? <div><StarIcon className="smstar"></StarIcon><StarIcon className="smstar"></StarIcon><StarIcon className="smstar"></StarIcon><StarIcon className="smstar"></StarIcon><StarIcon className="emptyStar"/><span className="ReviewCount">({ProductOne.countReviews})</span></div>
+                                                : Math.round(ProductOne.averageRating) === 5 ? <div><StarIcon className="smstar"></StarIcon><StarIcon className="smstar"></StarIcon><StarIcon className="smstar"></StarIcon><StarIcon className="smstar"></StarIcon><StarIcon className="smstar"></StarIcon><span className="ReviewCount">({ProductOne.countReviews})</span></div> : <div></div>
+                            }
+                        </div>
                         <div className="productPrice"><div style={{ marginTop: '10px' }}><strong style={{ fontSize: '16pt', color: '#AE0000' }}>{ProductOne.itemDetailFormList&&numberFormat(ProductOne.itemDetailFormList[0].price)}</strong>원</div></div>
                         <div className="productSizeColor">
                             <div className="productSize">
@@ -132,7 +140,7 @@ const ProductDetail = ({ match, history }) => {
                     <h2>다른상품</h2>
                     <ul className="otherProduct-ul">
                         {
-                            ProductList && ProductList.map((row, idx) => {
+                            ProductList.list && ProductList.list.map((row, idx) => {
                                 return (
                                     <li row={row} key={idx}
                                         onClick={
