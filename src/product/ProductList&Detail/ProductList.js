@@ -89,6 +89,30 @@ const ProductList = (props) => {
         params.categoryId = categoryId;
       }
 
+      if(data.sortCheck == true)
+      {
+        if(data.sortOpt === "인기순")
+          params.sorted = "ranking";
+        else if(data.sortOpt === "별점순")
+          params.sorted = "rating";
+        else if(data.sortOpt === "판매순")
+          params.sorted = "sales";
+        else if(data.sortOpt === "가격△")
+          params.sorted = "price";
+        else if(data.sortOpt === "가격▽")
+          params.sorted = "priceAsc";
+        else if(data.sortOpt === "리뷰순")
+          params.sorted = "review";
+        else if(data.sortOpt === "등록일△")
+          params.sorted = "date";
+        else if(data.sortOpt === "등록일▽")
+          params.sorted = "dateAsc";
+      }
+      if(categoryId !== null)
+      {
+        params.categoryId = categoryId;
+      }
+
       const res = async () => {
         const result = await axios.request({
           url: "https://alconn.co/api/item/search",
@@ -98,7 +122,56 @@ const ProductList = (props) => {
         setProductList(result.data.data.list);
       };
       res();
-    } else {
+    } else if(props.match.path == "/product/header/hot")
+    {
+      const res = async () => {
+        const result = await axios.request({
+          url: "https://alconn.co/api/item/search",
+          method: "get",
+          params: {sorted: "ranking"},
+        });
+        setProductList(result.data.data.list);
+      };
+      res();
+    } else if(props.match.path == "/product/header/free")
+    {
+      const res = async () => {
+        const result = await axios.request({
+          url: "https://alconn.co/api/item/search",
+          method: "get",
+          params: {shippingChargeType: "FREE"},
+        });
+        setProductList(result.data.data.list);
+      };
+      res();
+    } else if(props.match.path == "/product/header/review")
+    {
+      const res = async () => {
+        const result = await axios.request({
+          url: "https://alconn.co/api/item/search",
+          method: "get",
+          params: {sorted: "review"},
+        });
+        setProductList(result.data.data.list);
+      };
+      res();
+    } else if(props.match.path == "/product/header/new")
+    {
+      const res = async () => {
+        const result = await axios.request({
+          url: "https://alconn.co/api/item/search",
+          method: "get",
+          params: {sorted: "date"},
+        });
+        setProductList(result.data.data.list);
+      };
+      res();
+    } else if(props.match.path == "/product/header/display")
+    {
+      
+    }
+    else
+    {
       const res = async () => {
         const result = await axios.get(
           "https://alconn.co/api/item/list/categoryid=" +
