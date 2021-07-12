@@ -37,7 +37,12 @@ const MainDoYouNeed = ({ history }) => {
                     float: "left",
                   }}
                 >
+<<<<<<< HEAD
                   <li className="doYouNeed"
+=======
+                  <li
+                    className="doYouNeed"
+>>>>>>> 51a1ea1ce0d1103366e5769eaad0de5e2dbfb636
                     row={row}
                     key={idx}
                     style={{
