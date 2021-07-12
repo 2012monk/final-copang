@@ -4,7 +4,8 @@ import Modal from "./ProductReviewModal";
 import StarIcon from "@material-ui/icons/Star";
 
 const ProductReviewBottom = (props) => {
-  let itemId = props.match.params.itemId;
+  // let itemId = props.match.params.itemId;
+  let itemId = props.itemId;
   //개별상품의 정보를 itemId로 받아 ProductOne에 저장
   const [ProductOne, setProductOne] = useState([]);
   useEffect(() => {
@@ -35,7 +36,7 @@ const ProductReviewBottom = (props) => {
     setModelOpen(false);
   };
 
-  https://alconn.co/api/item/search?sorted=rating
+  //alconn.co/api/item/search?sorted=rating
 
   return (
     <div className="product-review-wrap">
@@ -48,11 +49,11 @@ const ProductReviewBottom = (props) => {
           >
             상품리뷰&nbsp;&nbsp;
             <span style={{ width: "300px", height: "44" }}>
-              <StarIcon style={{width:'30px'}} className="star"></StarIcon>
-              <StarIcon style={{width:'30px'}} className="star"></StarIcon>
-              <StarIcon style={{width:'30px'}} className="star"></StarIcon>
-              <StarIcon style={{width:'30px'}} className="star"></StarIcon>
-              <StarIcon style={{width:'30px'}} className="star"></StarIcon>
+              <StarIcon style={{ width: "30px" }} className="star"></StarIcon>
+              <StarIcon style={{ width: "30px" }} className="star"></StarIcon>
+              <StarIcon style={{ width: "30px" }} className="star"></StarIcon>
+              <StarIcon style={{ width: "30px" }} className="star"></StarIcon>
+              <StarIcon style={{ width: "30px" }} className="star"></StarIcon>
               &nbsp;&nbsp;
               <span className="reviewlength">{Review.length}</span>
             </span>

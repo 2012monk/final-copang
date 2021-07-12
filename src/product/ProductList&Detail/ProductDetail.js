@@ -3,7 +3,9 @@ import axios from "axios";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import StarIcon from "@material-ui/icons/Star";
-
+import ProductDescBottom from "../ProductList&Detail/ProductDescBottom";
+import ProductReviewBottom from "../ProductList&Detail/ProductReviewBottom";
+import ProductQuestionBottom from "../ProductList&Detail/ProductQuestionBottom";
 const numberFormat = (num) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
@@ -21,7 +23,7 @@ const ProductDetail = ({ match, history }) => {
       setProductOne(result.data.data);
     };
     res();
-  }, [itemId]);
+  }, []);
 
   const [ProductList, setProductList] = useState([]);
 
@@ -117,7 +119,7 @@ const ProductDetail = ({ match, history }) => {
               ) : (
                 <div></div>
               )}
-              {(ProductOne.countReviews)}
+              {ProductOne.countReviews}
             </div>
             <div className="productPrice">
               <div style={{ marginTop: "10px" }}>
@@ -274,14 +276,12 @@ const ProductDetail = ({ match, history }) => {
                 if (idx >= 10) return;
                 else
                   return (
-                    <li className="otherProduct"
+                    <li
+                      className="otherProduct"
                       row={row}
                       key={idx}
                       onClick={() => {
-                        history.push(
-                          "/product/selectOne/" +
-                            row.itemId
-                        );
+                        history.push("/product/selectOne/" + row.itemId);
                       }}
                     >
                       <dl>
@@ -314,13 +314,27 @@ const ProductDetail = ({ match, history }) => {
           </ul>
         </div>
         <div className="productMenuBar" style={{ position: "sticky" }}>
-          <ul className="productMenuBarUl">
+          <div>
+            <ul className="productMenuBarUl">
+              <li className="ProductDescBottom">상품상세</li>
+              <li className="ProductReviewBottom">상품리뷰</li>
+              <li className="ProductQuestionBottom">상품문의</li>
+            </ul>
+            <div className="111">
+              <ProductDescBottom itemId={itemId} />
+            </div>
+            <div className="222">
+              <ProductReviewBottom itemId={itemId} />
+            </div>
+            <div className="333">
+              <ProductQuestionBottom itemId={itemId} />
+            </div>
+          </div>
+          {/* <ul className="productMenuBarUl">
             <li
               className="ProductDescBottom"
               onClick={() => {
-                history.push(
-                  "/product/selectOne/" + itemId
-                );
+                history.push("/product/selectOne/" + itemId);
               }}
             >
               상품상세
@@ -328,9 +342,7 @@ const ProductDetail = ({ match, history }) => {
             <li
               className="ProductReviewBottom"
               onClick={() => {
-                history.push(
-                  "/product/selectOne/" + itemId
-                );
+                history.push("/product/selectOne/" + itemId);
               }}
             >
               상품리뷰
@@ -338,14 +350,12 @@ const ProductDetail = ({ match, history }) => {
             <li
               className="ProductQuestionBottom"
               onClick={() => {
-                history.push(
-                  "/product/selectOne/" + itemId
-                );
+                history.push("/product/selectOne/" + itemId);
               }}
             >
               상품문의
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
     </div>
