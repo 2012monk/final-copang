@@ -23,7 +23,7 @@ const ProductDetail = ({ match, history }) => {
       setProductOne(result.data.data);
     };
     res();
-  }, []);
+  }, [itemId]);
 
   const [ProductList, setProductList] = useState([]);
 
@@ -276,14 +276,12 @@ const ProductDetail = ({ match, history }) => {
                 if (idx >= 10) return;
                 else
                   return (
-                    <li
-                      className="otherProduct"
-                      row={row}
-                      key={idx}
-                      onClick={() => {
-                        history.push("/product/selectOne/" + row.itemId);
-                      }}
-                    >
+                    <li row={row} key={idx}
+                      onClick={
+                        () => {
+                          history.push("/product/selectOne/" + row.itemId);
+                        }
+                      }>
                       <dl>
                         <dt>
                           <img
