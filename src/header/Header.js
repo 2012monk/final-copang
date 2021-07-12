@@ -21,7 +21,7 @@ import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
+import Drawer from "../hyunjin/Drawer";
 const useStyles = makeStyles((theme) => ({
   linkBasic: {
     color: "black",
@@ -96,26 +96,27 @@ function Header(props) {
   const user = useSelector((state) => state.user);
   //console.log(user.userData);
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [search, setSearch] = useState("");
-
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
   const history = useHistory();
 
   const handleEnter = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && search !== "") {
       const data = {
         keyword: search,
         priceCheck: false,
         dateCheck: false,
       };
       localStorage.setItem("keyword", search);
+      localStorage.removeItem("categoryId");
       history.push("/product/search/option", data);
     }
   };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [search, setSearch] = useState("");
+
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -196,14 +197,15 @@ function Header(props) {
         style={{ backgroundColor: "white" }}
       >
         <Toolbar>
-          <IconButton
+          <Drawer />
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color={"#333"}
             aria-label="open drawer"
-          >
-            <MenuIcon style={{ fontSize: "2.5rem" }} />
-          </IconButton>
+          > */}
+          {/* <MenuIcon style={{ fontSize: "2.5rem" }} />
+          </IconButton> */}
           <Typography className={classes.title} variant="h6" noWrap>
             <Link exact to="/" className={classes.linkBasic}>
               <img src={logoImg} alt="logo" />
