@@ -37,12 +37,8 @@ const MainDoYouNeed = ({ history }) => {
                     float: "left",
                   }}
                 >
-<<<<<<< HEAD
-                  <li className="doYouNeed"
-=======
                   <li
                     className="doYouNeed"
->>>>>>> 51a1ea1ce0d1103366e5769eaad0de5e2dbfb636
                     row={row}
                     key={idx}
                     style={{
@@ -59,7 +55,7 @@ const MainDoYouNeed = ({ history }) => {
                       );
                     }}
                   >
-                    <dl style={{ marginTop: "0", marginBottom: "1rem;" }}>
+                    <dl style={{ marginTop: "0", marginBottom: "16px;" }}>
                       <dt>
                         <img
                           alt={row.mainImg}
