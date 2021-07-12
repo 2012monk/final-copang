@@ -53,6 +53,7 @@ export const Drawer = ({ position, history }) => {
           label={cild.categoryName}
           parentMenuOpen={open}
           onClick={() => { handleClick(cild.categoryId) }}
+
         >
 
           {
@@ -88,6 +89,7 @@ export const Drawer = ({ position, history }) => {
           )
         }
       </NestedMenuItem>
+
 
       {/* </Menu> */}
     </div>
