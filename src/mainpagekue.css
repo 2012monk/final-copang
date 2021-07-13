@@ -15,22 +15,30 @@
 }
 
 .MainTodayDiscoverykue {
+  margin-bottom: 20px;
+  margin-top: 30px;
   width: 100%;
   height: auto;
   min-height: 1108px;
 }
 
 .MainTodaykue {
+  margin-bottom: 20px;
+  margin-top: 30px;
   clear: both;
   min-height: 430px;
 }
 
 .MainDoYouNeedkue {
+  margin-bottom: 20px;
+  margin-top: 30px;
   clear: both;
   min-height: 430px;
 }
 
 .MainHotBookkue {
+  margin-bottom: 20px;
+  margin-top: 30px;
   clear: both;
   min-height: 430px;
 }
