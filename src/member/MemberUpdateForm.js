@@ -43,7 +43,6 @@ const MemberUpdateForm = (props) => {
             <h4> 비밀번호 입력 </h4>
             <input type="password" name="password" onChange={handleInfoChange} /> 
 
-            <button onClick={()=> console.log(info)}>제발</button>
             <button onClick={()=>handleSubmit()}> 수정하기 </button>
         </div>
     )
