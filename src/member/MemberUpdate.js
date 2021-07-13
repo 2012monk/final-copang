@@ -119,14 +119,6 @@ const MemberUpdate = (props, { history }) => {
 
     return (
         <React.Fragment>
-            {/* { userId ? <div><div>{userId.clientId}</div>
-                <div>{userId.description}</div>
-                <div>{userId.phone}</div>
-                <div>{userId.profileImage}</div>
-                <div>{userId.realName}</div>
-                <div>{userId.role}</div>
-                <div>{userId.signInDate}</div>
-                <div>{userId.username}</div></div> : "Loading1"} */}
             <h2>개인정보 확인하기</h2>
             <Grid container spacing={4}>
                 <Grid item xs={xs} sm={4}>
@@ -138,7 +130,6 @@ const MemberUpdate = (props, { history }) => {
                         value={userId.username}
                         fullWidth
                         autoComplete="given-name"
-                    // onChange={onUsernameHandler}
                     />
                 </Grid>
                 <Grid item xs={xs} sm={4}>
