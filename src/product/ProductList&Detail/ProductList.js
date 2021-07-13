@@ -59,6 +59,8 @@ const ProductList = (props) => {
   };
 
   useEffect(() => {
+    setProductList([]);
+    setLoad1(false);
     const path = props.match.path;
     if (path.indexOf("/product/header") == -1) {
       console.log("false!!");
