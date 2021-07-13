@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Product.css";
 import ProductListRowItem from "./ProductListRowItem";
+// import CategorySidebar from "./CategorySidebar";
 
 const ProductList = (props) => {
-  
   const convertDate = () => {
     const dt = new Date();
     let year = dt.getFullYear() + "-";
@@ -27,7 +27,19 @@ const ProductList = (props) => {
 
   useEffect(() => {
     console.log("변화체크");
-    console.log(price + "_" + priceOpt + "_" + priceCheck + "_" + date + "_" + dateOpt + "_" + dateCheck);
+    console.log(
+      price +
+        "_" +
+        priceOpt +
+        "_" +
+        priceCheck +
+        "_" +
+        date +
+        "_" +
+        dateOpt +
+        "_" +
+        dateCheck
+    );
   }, [price, priceOpt, date, dateOpt]);
 
   const clickOptionSearch = () => {
@@ -57,29 +69,28 @@ const ProductList = (props) => {
       console.log(props.location.state);
       const data = props.location.state;
       let query = "?";
-      if(data.priceCheck == false && data.dateCheck == false)
-        return; 
+      if (data.priceCheck == false && data.dateCheck == false) return;
       if (data.priceCheck == true) {
-        if (data.priceOpt == "이상") 
-            query += "priceOver=";
-        else // "이하"
-            query += "priceUnder=";
+        if (data.priceOpt == "이상") query += "priceOver=";
+        // "이하"
+        else query += "priceUnder=";
         query += data.price;
       }
 
-      if(data.dateCheck == true) {
+      if (data.dateCheck == true) {
         query += "&";
-        if(data.dateOpt == "이전")
-            query += "endDate=";
-        else //이후
-            query += "startDate=";
+        if (data.dateOpt == "이전") query += "endDate=";
+        //이후
+        else query += "startDate=";
         query += data.date;
       }
       console.log("쿼리 출력");
       console.log(query);
 
       const res = async () => {
-        const result = await axios.get("https://alconn.co/api/item/search"+query);
+        const result = await axios.get(
+          "https://alconn.co/api/item/search" + query
+        );
         console.log(result);
       };
       res();
@@ -96,12 +107,13 @@ const ProductList = (props) => {
     }
   }, []);
 
-const test = () => {
+  const test = () => {
     alert("hi");
-}
+  };
 
   return (
     <div className="productlist">
+      {/* <CategorySidebar /> */}
       <button
         type="button"
         class="btn btn-primary"
@@ -115,7 +127,7 @@ const test = () => {
           <div className="col-3">
             <input
               value={priceCheck}
-              onChange={(e)=>setPriceCheck(e.target.checked)}
+              onChange={(e) => setPriceCheck(e.target.checked)}
               type="checkbox"
             />{" "}
             가격
