@@ -4,6 +4,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Product.css";
 import ProductListRowItem from "./ProductListRowItem";
+// import CategorySidebar from "./CategorySidebar";
+
+const SHABATH = "shabath";
 
 const ProductList = (props) => {
   const convertDate = () => {
@@ -23,6 +26,7 @@ const ProductList = (props) => {
   const [date, setDate] = useState(convertDate());
   const [dateOpt, setDateOpt] = useState("이전");
   const [dateCheck, setDateCheck] = useState(false);
+
   const [sortOpt, setSortOpt] = useState("인기순");
   const [sortCheck, setSortCheck] = useState(false);
   const [keyword, setKeyword] = useState("");
@@ -153,6 +157,16 @@ const ProductList = (props) => {
       };
       res();
     } else if (props.match.path == "/product/header/display") {
+    } else if (props.match.path == "/product/keyword/" + SHABATH) {
+      const res = async () => {
+        const result = await axios.request({
+          url: "https://alconn.co/api/item/search",
+          method: "get",
+          params: { keyword: SHABATH },
+        });
+        setProductList(result.data.data.list);
+      };
+      res();
     } else {
       const res = async () => {
         const result = await axios.get(
