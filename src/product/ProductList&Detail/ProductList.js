@@ -25,22 +25,10 @@ const ProductList = (props) => {
   const [dateOpt, setDateOpt] = useState("이전");
   const [dateCheck, setDateCheck] = useState(false);
 
-  useEffect(() => {
-    console.log("변화체크");
-    console.log(
-      price +
-        "_" +
-        priceOpt +
-        "_" +
-        priceCheck +
-        "_" +
-        date +
-        "_" +
-        dateOpt +
-        "_" +
-        dateCheck
-    );
-  }, [price, priceOpt, date, dateOpt]);
+  const [sortOpt, setSortOpt] = useState("인기순");
+  const [sortCheck, setSortCheck] = useState(false);
+  const [keyword, setKeyword] = useState("");
+
 
   const clickOptionSearch = () => {
     const data = {
@@ -50,164 +38,282 @@ const ProductList = (props) => {
       date,
       dateOpt,
       dateCheck,
+      sortOpt,
+      sortCheck,
+      keyword,
     };
-    console.log("data출력");
     console.log(data);
     props.history.push("/product/search/option", data);
   };
 
+  const enterPress = (e) => {
+    if (e.key == "Enter") clickOptionSearch();
+  };
+
   useEffect(() => {
-    console.log("ProductList 실행");
     if (props.match.path === "/product") {
       const res = async () => {
         const result = await axios.get("https://alconn.co/api/item/search");
         setProductList(result.data.data.list);
       };
       res();
-    } else if (props.match.path == "/product/search/option") {
-      console.log("data 출력");
-      console.log(props.location.state);
+    } else if (props.match.path === "/product/search/option") {
+      const categoryId = localStorage.getItem("categoryId");
+      const keyword = localStorage.getItem("keyword");
       const data = props.location.state;
-      let query = "?";
-      if (data.priceCheck == false && data.dateCheck == false) return;
-      if (data.priceCheck == true) {
-        if (data.priceOpt == "이상") query += "priceOver=";
-        // "이하"
-        else query += "priceUnder=";
-        query += data.price;
+
+
+      // 카테고리에서 productlist로 넘어올 땐 localstorage에서 'keyword' remove 할 것
+      // 카테고리 search 시에는 keword 제거, keyword search 시에는 카테고리 제거
+
+      // history에서 받아온 data로 string query 추가
+      let params = {};
+      if (keyword !== null) {
+        params.keyword = keyword.replaceAll(" ", "+");
+      }
+      if (data.priceCheck === true) {
+        if (data.priceOpt === "이상") params.priceOver = data.price;
+        else params.priceUnder = data.price;
+      }
+      if (data.dateCheck === true) {
+        if (data.dateOpt === "이전") params.endDate = data.date;
+        else params.startDate = data.date;
+      }
+      if (data.sortCheck == true) {
+        if (data.sortOpt === "인기순") params.sorted = "ranking";
+        else if (data.sortOpt === "별점순") params.sorted = "rating";
+        else if (data.sortOpt === "판매순") params.sorted = "sales";
+        else if (data.sortOpt === "가격△") params.sorted = "price";
+        else if (data.sortOpt === "가격▽") params.sorted = "priceAsc";
+        else if (data.sortOpt === "리뷰순") params.sorted = "review";
+        else if (data.sortOpt === "등록일△") params.sorted = "date";
+        else if (data.sortOpt === "등록일▽") params.sorted = "dateAsc";
+      }
+      if (categoryId !== null) {
+        params.categoryId = categoryId;
       }
 
-      if (data.dateCheck == true) {
-        query += "&";
-        if (data.dateOpt == "이전") query += "endDate=";
-        //이후
-        else query += "startDate=";
-        query += data.date;
+      if(data.sortCheck == true)
+      {
+        if(data.sortOpt === "인기순")
+          params.sorted = "ranking";
+        else if(data.sortOpt === "별점순")
+          params.sorted = "rating";
+        else if(data.sortOpt === "판매순")
+          params.sorted = "sales";
+        else if(data.sortOpt === "가격△")
+          params.sorted = "price";
+        else if(data.sortOpt === "가격▽")
+          params.sorted = "priceAsc";
+        else if(data.sortOpt === "리뷰순")
+          params.sorted = "review";
+        else if(data.sortOpt === "등록일△")
+          params.sorted = "date";
+        else if(data.sortOpt === "등록일▽")
+          params.sorted = "dateAsc";
       }
-      console.log("쿼리 출력");
-      console.log(query);
+      if(categoryId !== null)
+      {
+        params.categoryId = categoryId;
+
+      }
 
       const res = async () => {
-        const result = await axios.get(
-          "https://alconn.co/api/item/search" + query
-        );
-        console.log(result);
+
+        const result = await axios.request({
+          url: "https://alconn.co/api/item/search",
+          method: "get",
+          params,
+        });
+        setProductList(result.data.data.list);
       };
       res();
-    } else {
+    } else if(props.match.path == "/product/header/hot")
+    {
+      const res = async () => {
+        const result = await axios.request({
+          url: "https://alconn.co/api/item/search",
+          method: "get",
+          params: {sorted: "ranking"},
+        });
+        setProductList(result.data.data.list);
+      };
+      res();
+    } else if(props.match.path == "/product/header/free")
+    {
+      const res = async () => {
+        const result = await axios.request({
+          url: "https://alconn.co/api/item/search",
+          method: "get",
+          params: {shippingChargeType: "FREE"},
+        });
+        setProductList(result.data.data.list);
+      };
+      res();
+    } else if(props.match.path == "/product/header/review")
+    {
+      const res = async () => {
+        const result = await axios.request({
+          url: "https://alconn.co/api/item/search",
+          method: "get",
+          params: {sorted: "review"},
+        });
+        setProductList(result.data.data.list);
+
+      };
+      res();
+    } else if(props.match.path == "/product/header/new")
+    {
+      const res = async () => {
+        const result = await axios.request({
+          url: "https://alconn.co/api/item/search",
+          method: "get",
+          params: {sorted: "date"},
+        });
+        setProductList(result.data.data.list);
+      };
+      res();
+    } else if(props.match.path == "/product/header/display")
+    {
+      
+    }
+    else
+    {
       const res = async () => {
         const result = await axios.get(
           "https://alconn.co/api/item/list/categoryid=" +
             props.match.params.categoryId
         );
+        localStorage.setItem("categoryId", props.match.params.categoryId);
+        localStorage.removeItem("keyword");
         setProductList(result.data.data);
-        console.log(result.data);
       };
       res();
     }
-  }, []);
 
-  const test = () => {
-    alert("hi");
-  };
+  }, [props.location.state]);
 
   return (
-    <div className="productlist">
-      {/* <CategorySidebar /> */}
-      <button
-        type="button"
-        class="btn btn-primary"
-        data-toggle="collapse"
-        data-target="#search-collapse"
-      >
-        조건 검색
-      </button>
-      <div id="search-collapse" class="collapse" style={{ marginTop: "10px" }}>
-        <div className="row col-10">
-          <div className="col-3">
-            <input
-              value={priceCheck}
-              onChange={(e) => setPriceCheck(e.target.checked)}
-              type="checkbox"
-            />{" "}
-            가격
-            <br />
-            <input
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              type="text"
-              className="form-control"
-              id="price-input"
-            />
-          </div>
-          <div className="col-2">
-            <br />
-            <select
-              value={priceOpt}
-              onChange={(e) => setPriceOpt(e.target.value)}
-              className="form-control"
-              id="price-option"
-            >
-              <option>이상</option>
-              <option>이하</option>
-            </select>
-          </div>
-
+    <div style={{ display: "flex" }}>
+      {/* <div style={{ float: "left", width: "300px", height: "100px" }}> */}
+      {/* <div style={{ marginTop: "10px" }}> */}
+      <div style={{ width: "20%" }}>
+        <div>
+          <input
+            value={priceCheck}
+            onChange={(e) => setPriceCheck(e.target.checked)}
+            type="checkbox"
+          />{" "}
+          가격
           <br />
-
-          <div className="col-3">
-            <input
-              checked={dateCheck}
-              onChange={(e) => setDateCheck(e.target.checked)}
-              type="checkbox"
-            />{" "}
-            등록일
-            <br />
-            <input
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              type="date"
-              className="form-control"
-              id="date-input"
-            />
-          </div>
-          <div className="col-2">
-            <br />
-            <select
-              value={dateOpt}
-              onChange={(e) => setDateOpt(e.target.value)}
-              className="form-control"
-              id="date-option"
-            >
-              <option>이전</option>
-              <option>이후</option>
-            </select>
-          </div>
-          <div className="col-2">
-            <button
-              onClick={clickOptionSearch}
-              style={{ marginTop: "24px" }}
-              className="btn btn-primary"
-              id="btn-option"
-            >
-              적용
-            </button>
-          </div>
+          <input
+            onKeyPress={enterPress}
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            type="text"
+            className="form-control"
+            id="price-input"
+            // style={{ width: "100px", float: "left" }}
+          />
+          <select
+            value={priceOpt}
+            onChange={(e) => setPriceOpt(e.target.value)}
+            className="form-control"
+            id="price-option"
+            style={
+              {
+                // width: "80px",
+                // display: "inline-block",
+                // marginLeft: "10px",
+              }
+            }
+          >
+            <option>이상</option>
+            <option>이하</option>
+          </select>
+          <br />
+          <br />
+          <input
+            checked={dateCheck}
+            onChange={(e) => setDateCheck(e.target.checked)}
+            type="checkbox"
+          />{" "}
+          등록일
+          <br />
+          <input
+            type="date"
+            value={convertDate()}
+            className="form-control"
+            // style={{ width: "170px", float: "left" }}
+          />
+          <select
+            value={dateOpt}
+            onChange={(e) => setDateOpt(e.target.value)}
+            className="form-control"
+            id="date-option"
+            style={
+              {
+                // width: "80px",
+                // display: "inline-block",
+                // marginLeft: "10px",
+              }
+            }
+          >
+            <option>이전</option>
+            <option>이후</option>
+          </select>
+          <br />
+          <br />
+          <input
+            checked={sortCheck}
+            onChange={(e) => setSortCheck(e.target.checked)}
+            type="checkbox"
+          />{" "}
+          정렬 기준
+          <br />
+          <select
+            onChange={(e) => setSortOpt(e.target.value)}
+            className="form-control"
+            id="sort-option"
+            // style={{ width: "150px" }}
+          >
+            <option selected>인기순</option>
+            <option>별점순</option>
+            <option>판매순</option>
+            <option>리뷰순</option>
+            <option>가격△</option>
+            <option>가격▽</option>
+            <option>등록일△</option>
+            <option>등록일▽</option>
+          </select>
+          <br />
+          <button
+            onClick={clickOptionSearch}
+            // style={{ marginTop: "24px" }}
+            className="btn btn-primary"
+            id="btn-option"
+          >
+            조건 검색
+          </button>
         </div>
       </div>
-      <br />
-      <br />
-      <ul className="searchproduct">
-        {ProductList &&
-          ProductList.map((row, idx) => (
-            <ProductListRowItem
-              row={row}
-              key={idx}
-              no={idx + 1}
-              history={props.history}
-            />
-          ))}
-      </ul>
+      <div
+        // style={{ display: "inline-block", width: "980px" }}
+        style={{ width: "77%", paddingLeft: "3%" }}
+        // className="productlist"
+      >
+        <ul className="searchproduct">
+          {ProductList &&
+            ProductList.map((row, idx) => (
+              <ProductListRowItem
+                row={row}
+                key={idx}
+                no={idx + 1}
+                history={props.history}
+              />
+            ))}
+        </ul>
+      </div>
     </div>
   );
 };
