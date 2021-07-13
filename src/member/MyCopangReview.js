@@ -106,13 +106,15 @@ const MyCopangReview = ({ history }) => {
               reviewList.data.map((review, idx) => (
                 <Card className={classes.root}>
                   <CardActionArea style={{ minHeight: "340px" }}>
-                    <CardMedia
-                      component="img"
-                      alt="Contemplative Reptile"
-                      height="100%"
-                      image={review.image}
-                      title="Contemplative Reptile"
-                    />
+                    {review.image != null && (
+                      <CardMedia
+                        component="img"
+                        alt="Contemplative Reptile"
+                        height="100%"
+                        image={review.image}
+                        title="Contemplative Reptile"
+                      />
+                    )}
                     <CardContent style={{ padding: "5px" }}>
                       <Typography gutterBottom variant="h5" component="h2">
                         {review.title}

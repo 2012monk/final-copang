@@ -5,6 +5,9 @@ import axios from "axios";
 import "./Product.css";
 import ProductListRowItem from "./ProductListRowItem";
 import { PuffLoader } from "react-spinners";
+import { css } from "@emotion/react";
+import { red } from "@material-ui/core/colors";
+
 // import CategorySidebar from "./CategorySidebar";
 
 const SHABATH = "샤바스";
@@ -20,6 +23,13 @@ const ProductList = (props) => {
 
     return year + month + date;
   };
+
+  const override = css`
+    display: block;
+    margin: auto;
+    margin-top: 200px;
+    border-color: red;
+  `;
 
   const [ProductList, setProductList] = useState([]);
   const [price, setPrice] = useState(0);
@@ -199,14 +209,20 @@ const ProductList = (props) => {
       };
       res();
     } else {
-      const res = async () => {
-        const result = await axios.get(
-          "https://alconn.co/api/item/list/categoryid=" +
-            props.match.params.categoryId
-        );
-        localStorage.setItem("categoryId", props.match.params.categoryId);
-        localStorage.removeItem("keyword");
-        setProductList(result.data.data);
+      const res = () => {
+        axios
+          .get(
+            "https://alconn.co/api/item/list/categoryid=" +
+              props.match.params.categoryId
+          )
+          .then((res) => {
+            localStorage.setItem("categoryId", props.match.params.categoryId);
+            localStorage.removeItem("keyword");
+            setProductList(res.data.data);
+          })
+          .catch((err) => {
+            setLoad1(true);
+          });
       };
       res();
     }
@@ -260,7 +276,8 @@ const ProductList = (props) => {
           <br />
           <input
             type="date"
-            value={convertDate()}
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             className="form-control"
             // style={{ width: "170px", float: "left" }}
           />
@@ -326,7 +343,9 @@ const ProductList = (props) => {
           className="searchproduct"
           style={{ display: "flex", flexWrap: "wrap" }}
         >
-          {ProductList && ProductList.length == 0 && !load1 && <PuffLoader />}
+          {ProductList && ProductList.length == 0 && !load1 && (
+            <PuffLoader size={300} color={"dodgerblue"} css={override} />
+          )}
           {load1 ? (
             <h2 style={{ marginTop: "100px", marginLeft: "100px" }}>
               상품목록이 존재하지 않습니다
