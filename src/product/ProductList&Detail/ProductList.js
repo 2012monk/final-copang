@@ -55,8 +55,7 @@ const ProductList = (props) => {
 
   useEffect(() => {
     const path = props.match.path;
-    if(path.indexOf("/product/header") == -1)
-    {
+    if (path.indexOf("/product/header") == -1) {
       console.log("false!!");
       setHeader("");
     }
@@ -133,8 +132,7 @@ const ProductList = (props) => {
       };
       res();
       setHeader("전체 상품목록");
-    }
-    else if (props.match.path == "/product/header/hot") {
+    } else if (props.match.path == "/product/header/hot") {
       const res = async () => {
         const result = await axios.request({
           url: "https://alconn.co/api/item/search",
@@ -178,14 +176,13 @@ const ProductList = (props) => {
       };
       res();
       setHeader("최신 등록 상품");
-    } else if(props.match.path == "/product/keyword/:brand")
-    {
+    } else if (props.match.path == "/product/keyword/:brand") {
       const res = async () => {
         console.log(props.match.params);
         const result = await axios.request({
           url: "https://alconn.co/api/item/search",
           method: "get",
-          params: { keyword : props.match.params.brand },
+          params: { keyword: props.match.params.brand },
         });
         setProductList(result.data.data.list);
       };
@@ -205,8 +202,7 @@ const ProductList = (props) => {
   }, [props.location.state]);
 
   return (
-    <div style={{ display: "flex" }}>
-      <div className="1234">{header}</div>
+    <div style={{ display: "flex", marginTop: "40px" }}>
       {/* <div style={{ float: "left", width: "300px", height: "100px" }}> */}
       {/* <div style={{ marginTop: "10px" }}> */}
       <div style={{ width: "15%" }}>
@@ -314,6 +310,7 @@ const ProductList = (props) => {
         // className="productlist"
       >
         {/* <ul className="searchproduct"> */}
+        <div style={{ fontSize: "2em", fontWeight: "bold" }}>{header}</div>
         <div
           className="searchproduct"
           style={{ display: "flex", flexWrap: "wrap" }}
@@ -327,9 +324,11 @@ const ProductList = (props) => {
                 history={props.history}
               />
             ))}
-          {ProductList && ProductList.length == 0 && 
-            <h3 style={{marginLeft:'50px',marginTop:'100px'}}>상품 목록이 존재하지 않습니다.</h3>
-          }
+          {ProductList && ProductList.length == 0 && (
+            <h3 style={{ marginLeft: "50px", marginTop: "100px" }}>
+              상품 목록이 존재하지 않습니다.
+            </h3>
+          )}
           {/* style={{ display: "flex" }} */}
         </div>
         {/* </ul> */}
