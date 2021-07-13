@@ -14,7 +14,7 @@ const Menu = () => {
       {/* <Link to="/member/2">판매자 상품등록</Link>&nbsp;&nbsp; */}
       {/* <Link to="/member/3">MainPage(작업중)</Link>&nbsp;&nbsp; */}
       <div>
-        <Link to="/product">상품 리스트</Link>
+        <Link to="/product/header/all">전체 상품목록</Link>
       </div>
       <div>
         <Link to="/product/header/hot">HOT! 인기 상품</Link>
