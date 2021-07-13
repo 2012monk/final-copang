@@ -122,7 +122,56 @@ const ProductList = (props) => {
         setProductList(result.data.data.list);
       };
       res();
-    } else {
+    } else if(props.match.path == "/product/header/hot")
+    {
+      const res = async () => {
+        const result = await axios.request({
+          url: "https://alconn.co/api/item/search",
+          method: "get",
+          params: {sorted: "ranking"},
+        });
+        setProductList(result.data.data.list);
+      };
+      res();
+    } else if(props.match.path == "/product/header/free")
+    {
+      const res = async () => {
+        const result = await axios.request({
+          url: "https://alconn.co/api/item/search",
+          method: "get",
+          params: {shippingChargeType: "FREE"},
+        });
+        setProductList(result.data.data.list);
+      };
+      res();
+    } else if(props.match.path == "/product/header/review")
+    {
+      const res = async () => {
+        const result = await axios.request({
+          url: "https://alconn.co/api/item/search",
+          method: "get",
+          params: {sorted: "review"},
+        });
+        setProductList(result.data.data.list);
+      };
+      res();
+    } else if(props.match.path == "/product/header/new")
+    {
+      const res = async () => {
+        const result = await axios.request({
+          url: "https://alconn.co/api/item/search",
+          method: "get",
+          params: {sorted: "date"},
+        });
+        setProductList(result.data.data.list);
+      };
+      res();
+    } else if(props.match.path == "/product/header/display")
+    {
+      
+    }
+    else
+    {
       const res = async () => {
         const result = await axios.get(
           "https://alconn.co/api/item/list/categoryid=" +
@@ -137,10 +186,10 @@ const ProductList = (props) => {
   }, [props.location.state]);
 
   return (
-    <div>
+    <div style={{ display: "flex" }}>
       {/* <div style={{ float: "left", width: "300px", height: "100px" }}> */}
       {/* <div style={{ marginTop: "10px" }}> */}
-      <div>
+      <div style={{ width: "20%" }}>
         <div>
           <input
             value={priceCheck}
@@ -242,10 +291,9 @@ const ProductList = (props) => {
       </div>
       <div
         // style={{ display: "inline-block", width: "980px" }}
-        className="productlist"
+        style={{ width: "77%", paddingLeft: "3%" }}
+        // className="productlist"
       >
-        <br />
-        <br />
         <ul className="searchproduct">
           {ProductList &&
             ProductList.map((row, idx) => (
