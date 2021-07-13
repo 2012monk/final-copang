@@ -128,7 +128,6 @@ const MyCopangOrderDetail = (props) => {
       <hr />
       <div>
         <h3>받는사람 정보</h3>
-
         <div>받는 사람 : {orderDetail && orderDetail.address.receiverName}</div>
         <div>연락처 : {orderDetail && orderDetail.address.receiverPhone}</div>
         <div>
