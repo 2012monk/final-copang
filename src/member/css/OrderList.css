@@ -6,6 +6,7 @@
   background-color: white;
   margin-bottom: 20px;
   padding: 24px 24px 16px;
+  margin-left: 10px;
 }
 .box-header {
   height: 28px;
@@ -98,4 +99,12 @@
   /* width: 160px; */
   width: 100%;
   margin: 4px 0px;
+}
+
+.mypageleftlayout {
+  box-shadow: rgb(0 0 0 / 38%) 0px 2px 4px 0px, rgb(0 0 0 / 16%) 0px 0px 1px 0px;
+}
+
+.mypageleftlayout li {
+  padding-left: 10px;
 }
